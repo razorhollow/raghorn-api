@@ -24,7 +24,7 @@ function checkAuth(req, res, next) {
 }
 
 function isAdmin(req, res, next) {
-  req.user && req.user.userRole === 'admin' ? next () : res.status(401).json({ msg: 'Not Authorized' })
+  req.user && req.user.role === 'admin' ? next () : res.status(401).json({ msg: 'Not Authorized' })
 }
 
 module.exports = { decodeUserFromToken, checkAuth, isAdmin }

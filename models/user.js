@@ -47,6 +47,11 @@ module.exports = (sequelize, DataTypes) => {
         return () => this.getDataValue('password')
       },
     },
+    role: {
+      type: DataTypes.ENUM("admin", "member", "visitor"),
+      allowNull: false,
+      defaultValue: "admin"
+    }
   },
   {
     sequelize,
