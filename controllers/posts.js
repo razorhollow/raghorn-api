@@ -10,4 +10,15 @@ const addPost = async (req, res) => {
     }
 }
 
-module.exports = { addPost }
+const deletePost = async (req, res) => {
+    try {
+        const rowsRemoved = await Post.destroy(
+            { where: { id: req.params.id } }
+        )
+        res.status(200).json(rowsRemoved)
+    } catch (error) {
+        res.status(500).json({ err: error })
+    }
+}
+
+module.exports = { addPost, delete: deletePost }
