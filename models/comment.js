@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Post extends Model {
+  class Comment extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,46 +11,37 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Post.belongsTo(models.Profile, {foreignKey: 'profileId'})
-      Post.belongsTo(models.Category, {foreignKey: 'categoryId'})
-
-      Post.hasMany(models.Comment, {
-        foreignKey: 'postId',
-        as: 'comments'
-      })
+      Comment.belongsTo(models.Profile, { foreignKey: 'profileId' })
+      Comment.belongsTo(models.Post, { foreignKey: 'postId' })
     }
   }
-  Post.init({
+  Comment.init({
+    postId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Posts',
+        key: 'id'
+      }
+    },
     profileId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       onDelete: 'CASCADE',
       references: {
         model: 'Profiles',
-        key: 'id',
-      }
-    },
-    categoryId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      onDelete: 'CASCADE',
-      references: {
-        model: 'Categories',
         key: 'id'
       }
     },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    content: {
+    comment: {
       type: DataTypes.TEXT,
       allowNull: false,
-      notEmpty: true,
+      notEmpty: true
     }
   }, {
     sequelize,
-    modelName: 'Post',
+    modelName: 'Comment',
   });
-  return Post;
+  return Comment;
 };
