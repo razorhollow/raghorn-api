@@ -11,7 +11,19 @@ async function createComment(req, res) {
     }
 }
 
+const deleteComment = async (req, res) => {
+    try {
+        const rowsRemoved = await Post.destroy(
+            { where: { id: req.params.commentId } }
+        )
+        res.status(200).json(rowsRemoved)
+    } catch (error) {
+        res.status(500).json({ err: error })
+    }
+}
+
 
 module.exports = {
-    createComment
+    createComment,
+    delete: deleteComment
 }

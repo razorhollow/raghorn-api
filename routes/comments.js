@@ -10,5 +10,6 @@ const { decodeUserFromToken, checkAuth } = middleware
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.post('/:id/comments', checkAuth, commentsCtrl.createComment)
+router.delete('/:id/comments/:commentId', checkAuth, commentsCtrl.delete)
 
 module.exports = router
