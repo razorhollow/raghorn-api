@@ -13,7 +13,7 @@ async function createComment(req, res) {
 
 const deleteComment = async (req, res) => {
     try {
-        const rowsRemoved = await Post.destroy(
+        const rowsRemoved = await Comment.destroy(
             { where: { id: req.params.commentId } }
         )
         res.status(200).json(rowsRemoved)
