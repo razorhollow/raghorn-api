@@ -22,8 +22,24 @@ const deleteComment = async (req, res) => {
     }
 }
 
+const updateComment = async (req, res) => {
+    try {
+        req.body.profileId = req.user.profile.id 
+        req.body.postId = req.params.id 
+        const comment = await Comment.update(
+            req.body,
+            { where: { id: req.params.commentId }, returning: true }
+        )
+        res.status(200).json(comment)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json(error)
+    }
+}
+
 
 module.exports = {
     createComment,
-    delete: deleteComment
+    delete: deleteComment,
+    updateComment
 }
