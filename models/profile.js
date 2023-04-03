@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'comments'
       })
       Profile.hasMany(models.Payment, {
-        foreignKey: 'profileId',
+        foreignKey: 'memberId',
         as: 'payments'
       })
     }
