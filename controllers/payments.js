@@ -34,8 +34,18 @@ const update = async (req, res) => {
   }
 }
 
+const index = async (req, res) => {
+  try {
+      const payments = await Payment.findAll()
+      res.status(200).json(payments)
+  } catch (error) {
+      res.status(500).json(error)
+  }
+}
+
 module.exports = {
   create,
   delete: deletePayment,
-  update
+  update,
+  index
 }
