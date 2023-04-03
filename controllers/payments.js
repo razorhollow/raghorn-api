@@ -21,7 +21,21 @@ const deletePayment = async(req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+    const payment = await Payment.update(
+      req.body,
+      { where: { id: req.params.id },
+    returning: true }
+    )
+    res.status(200).json(payment)
+  } catch (error) {
+    res.status(500).json({err: error })
+  }
+}
+
 module.exports = {
   create,
-  delete: deletePayment
+  delete: deletePayment,
+  update
 }
