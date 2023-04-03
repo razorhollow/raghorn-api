@@ -34,4 +34,13 @@ const update = async(req, res) => {
     }
 }
 
-module.exports = { addPost, delete: deletePost, update }
+const index = async (req, res) => {
+    try {
+        const posts = await Post.findAll()
+        res.status(200).json(posts)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+module.exports = { addPost, delete: deletePost, update, index }

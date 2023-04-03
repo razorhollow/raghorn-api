@@ -37,9 +37,19 @@ const updateComment = async (req, res) => {
     }
 }
 
+const index = async (req, res) => {
+    try {
+        const comments = await Comment.findAll()
+        res.status(200).json(comments)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 
 module.exports = {
     createComment,
     delete: deleteComment,
-    updateComment
+    updateComment,
+    index
 }

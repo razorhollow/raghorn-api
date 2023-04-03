@@ -15,6 +15,7 @@ router.use(decodeUserFromToken)
 
 router.use('/:id/comments', commentsRouter)
 
+router.get('/', checkAuth, postsCtrl.index)
 router.delete('/:id', checkAuth, postsCtrl.delete)
 router.post('/', checkAuth, postsCtrl.addPost)
 router.put('/:id', checkAuth, postsCtrl.update)
