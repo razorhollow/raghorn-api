@@ -17,4 +17,5 @@ router.use('/:id/comments', commentsRouter)
 
 router.delete('/:id', checkAuth, postsCtrl.delete)
 router.post('/', checkAuth, postsCtrl.addPost)
+router.put('/:id', checkAuth, postsCtrl.update)
 module.exports = router

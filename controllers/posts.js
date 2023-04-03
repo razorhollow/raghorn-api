@@ -21,4 +21,17 @@ const deletePost = async (req, res) => {
     }
 }
 
-module.exports = { addPost, delete: deletePost }
+const update = async(req, res) => {
+    try {
+        req.body.profileId = req.user.profile.id
+        const post = await Post.update(
+            req.body,
+            { where: { id: req.params.id }, returning: true }
+        ) 
+        res.status(200).json(post)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+module.exports = { addPost, delete: deletePost, update }
