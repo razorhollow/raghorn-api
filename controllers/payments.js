@@ -10,6 +10,18 @@ const create = async(req, res) => {
   }
 }
 
+const deletePayment = async(req, res) => {
+  try {
+    const rowsRemoved = await Payment.destroy(
+      { where: { id: req.params.id } }
+    )
+    res.status(200).json(rowsRemoved)
+  } catch (error) {
+    res.status(500).json({err: error })
+  }
+}
+
 module.exports = {
-  create
+  create,
+  delete: deletePayment
 }

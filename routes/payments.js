@@ -11,5 +11,6 @@ const { decodeUserFromToken, checkAuth, isAdmin } = middleware
 router.use(decodeUserFromToken)
 
 router.post('/', isAdmin, paymentsCtrl.create)
+router.delete('/:id', isAdmin, paymentsCtrl.delete)
 
 module.exports = router
