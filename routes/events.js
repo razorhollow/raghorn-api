@@ -11,6 +11,7 @@ const { decodeUserFromToken, checkAuth } = middleware
 router.use(decodeUserFromToken)
 
 router.post('/', eventsCtrl.create)
+router.delete('/:id', eventsCtrl.delete)
 
 
 module.exports = router
