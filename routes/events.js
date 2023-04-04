@@ -2,7 +2,7 @@ const router = require('express').Router()
 const eventsCtrl = require('../controllers/events.js')
 const middleware = require('../middleware/auth.js')
 
-const { decodeUserFromToken, checkAuth } = middleware
+const { decodeUserFromToken, checkAuth, isAdmin } = middleware
 
 /*---------- Public Routes ----------*/
 
@@ -10,10 +10,10 @@ const { decodeUserFromToken, checkAuth } = middleware
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 
-router.get('/', eventsCtrl.index)
-router.post('/', eventsCtrl.create)
-router.put('/:id', eventsCtrl.update)
-router.delete('/:id', eventsCtrl.delete)
+router.get('/', isAdmin, eventsCtrl.index)
+router.post('/', isAdmin, eventsCtrl.create)
+router.put('/:id', isAdmin, eventsCtrl.update)
+router.delete('/:id', isAdmin, eventsCtrl.delete)
 
 
 module.exports = router

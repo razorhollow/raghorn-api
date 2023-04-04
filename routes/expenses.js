@@ -2,7 +2,7 @@ const router = require('express').Router()
 const expensesCtrl = require('../controllers/expenses.js')
 const middleware = require('../middleware/auth.js')
 
-const { decodeUserFromToken, checkAuth } = middleware
+const { decodeUserFromToken, checkAuth, isAdmin } = middleware
 
 /*---------- Public Routes ----------*/
 
@@ -10,6 +10,8 @@ const { decodeUserFromToken, checkAuth } = middleware
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 
-router.post('/', expensesCtrl.create)
+router.post('/', isAdmin, expensesCtrl.create)
+router.put('/:id', isAdmin, expensesCtrl.update)
+router.delete('/:id', isAdmin, expensesCtrl.delete)
 
 module.exports = router
