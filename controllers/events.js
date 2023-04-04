@@ -20,7 +20,21 @@ const deleteEvent = async(req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+    const event = await Event.update(
+      req.body,
+      { where: { id: req.params.id },
+    returning: true }
+    )
+    res.status(200).json(event)
+  } catch (error) {
+    res.status(500).json({err: error })
+  }
+}
+
 module.exports = {
   create,
-  delete: deleteEvent
+  delete: deleteEvent,
+  update
 }
