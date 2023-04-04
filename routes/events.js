@@ -10,6 +10,7 @@ const { decodeUserFromToken, checkAuth } = middleware
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 
+router.get('/', eventsCtrl.index)
 router.post('/', eventsCtrl.create)
 router.put('/:id', eventsCtrl.update)
 router.delete('/:id', eventsCtrl.delete)
