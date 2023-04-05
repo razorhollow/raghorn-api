@@ -1,4 +1,4 @@
-const { Post, Category } = require('../models')
+const { Post, Category, Profile } = require('../models')
 
 const addPost = async (req, res) => {
     try {
@@ -36,7 +36,15 @@ const update = async(req, res) => {
 
 const index = async (req, res) => {
     try {
-        const posts = await Post.findAll()
+        const posts = await Post.findAll({
+            include: [
+                {
+                    model: Profile,
+                    as: 'profile',
+                }
+            ]
+        })
+        
         res.status(200).json(posts)
     } catch (error) {
         res.status(500).json(error)
