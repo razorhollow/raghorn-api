@@ -37,6 +37,7 @@ const update = async(req, res) => {
 const index = async (req, res) => {
     try {
         const posts = await Post.findAll({
+            order: [['createdAt', 'DESC']],
             include: [
                 {
                     model: Profile,
