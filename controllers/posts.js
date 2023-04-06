@@ -1,4 +1,4 @@
-const { Post, Category, Profile } = require('../models')
+const { Post, Category, Profile, Comment } = require('../models')
 
 const addPost = async (req, res) => {
     try {
@@ -41,12 +41,17 @@ const index = async (req, res) => {
                 {
                     model: Profile,
                     as: 'profile',
+                },
+                {
+                    model: Comment,
+                    as: 'comments'
                 }
             ]
         })
         
         res.status(200).json(posts)
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 }
