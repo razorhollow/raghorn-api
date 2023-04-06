@@ -1,4 +1,4 @@
-const { Comment, Post } = require('../models')
+const { Comment, Post, Profile } = require('../models')
 
 async function createComment(req, res) {
     try {
@@ -39,7 +39,15 @@ const updateComment = async (req, res) => {
 
 const index = async (req, res) => {
     try {
-        const comments = await Comment.findAll()
+        const comments = await Comment.findAll({
+            include: [
+                {
+                    model: Profile,
+                    as: 'profile'
+                }
+            ]
+        })
+        
         res.status(200).json(comments)
     } catch (error) {
         res.status(500).json(error)

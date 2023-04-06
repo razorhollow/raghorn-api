@@ -44,9 +44,15 @@ const index = async (req, res) => {
                 },
                 {
                     model: Comment,
-                    as: 'comments'
-                }
-            ]
+                    as: 'comments',
+                    include: [
+                        {
+                            model: Profile,
+                            as: 'profile'
+                        },
+                    ],
+                },
+            ],
         })
         
         res.status(200).json(posts)
