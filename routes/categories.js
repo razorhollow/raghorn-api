@@ -9,6 +9,7 @@ const { decodeUserFromToken, checkAuth, isAdmin } = middleware
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
+router.get('/', checkAuth, categoriesCtrl.index)
 router.post('/', isAdmin, categoriesCtrl.create)
 
 
