@@ -6,6 +6,7 @@ const addPost = async (req, res) => {
        const post = await Post.create(req.body)
        res.status(200).json(post) 
     } catch (error) {
+        console.error('This is the error:', error)
         res.status(500).json(error)
     }
 }
